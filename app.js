@@ -27,19 +27,18 @@ const server = http.createServer((req, res) => {
       console.log(chunk);
       body.push(chunk);
     });
-    req.on('end', () => {
+    return req.on('end', () => {
       // 위의 chunk들과 상호 작용하기 위해서는 버퍼를 사용해야 한다.
       // 아래의 코드는 새 버퍼를 생성하고, 본문 안에 있는 모든 chunk가 추가될 것이다.
       // 그리고 요청의 본문이 text이므로 들어오는 data도 text이기 때문에 문자열로 전환할 수 있다.
       const parsedBody = Buffer.concat(body).toString();
       const message = parsedBody.split('=')[1];
       fs.writeFileSync('message.txt', message);
+      res.statusCode = 302;
+      // '/' 로 redirect
+      res.setHeader('Location', '/');
+      return res.end();
     });
-
-    res.statusCode = 302;
-    // '/' 로 redirect
-    res.setHeader('Location', '/');
-    return res.end();
   }
   res.setHeader('Content-Type', 'text/html');
   res.write('<html>');
