@@ -3,7 +3,13 @@ const http = require("http");
 
 // 1. 서버 생성
 const server = http.createServer((req, res) => {
-  console.log(req.url, req.method, req.headers);
+  // 응답에 header를 붙이고, 응답의 일부가 될 컨텐츠 유형은 HTML이라는 일련의 메타 정보를 전달
+  res.setHeader("Content-Type", "text/html");
+  res.write("<html>");
+  res.write("<head><title>My First Page</title></head>");
+  res.write("<body><h1>Hello from my Node.js Server!</h1></body>");
+  res.write("</html>");
+  res.end();
 });
 
 // 2. listen은 Node.js가 스크립트를 바로 종료하지 않고 계속 실행되면서 듣도록 한다.
