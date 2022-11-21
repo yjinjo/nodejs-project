@@ -1,14 +1,24 @@
 // 0. 경로를 생략하면 http라는 글로벌 모듈을 찾는다.
-const http = require("http");
+const http = require('http');
 
 // 1. 서버 생성
 const server = http.createServer((req, res) => {
-  // 응답에 header를 붙이고, 응답의 일부가 될 컨텐츠 유형은 HTML이라는 일련의 메타 정보를 전달
-  res.setHeader("Content-Type", "text/html");
-  res.write("<html>");
-  res.write("<head><title>My First Page</title></head>");
-  res.write("<body><h1>Hello from my Node.js Server!</h1></body>");
-  res.write("</html>");
+  const url = req.url;
+
+  if (url === '/') {
+    res.write('<html>');
+    res.write('<head><title>Enter Message</title></head>');
+    res.write(
+      "<body><form action='/message' method='POST'><input type='text' name='message'><button type='submit'>Send</button></form></body>"
+    );
+    res.write('</html>');
+    return res.end();
+  }
+  res.setHeader('Content-Type', 'text/html');
+  res.write('<html>');
+  res.write('<head><title>My First Page</title></head>');
+  res.write('<body><h1>Hello from my Node.js Server!</h1></body>');
+  res.write('</html>');
   res.end();
 });
 
