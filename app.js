@@ -33,11 +33,12 @@ const server = http.createServer((req, res) => {
       // 그리고 요청의 본문이 text이므로 들어오는 data도 text이기 때문에 문자열로 전환할 수 있다.
       const parsedBody = Buffer.concat(body).toString();
       const message = parsedBody.split('=')[1];
-      fs.writeFileSync('message.txt', message);
-      res.statusCode = 302;
-      // '/' 로 redirect
-      res.setHeader('Location', '/');
-      return res.end();
+      fs.writeFile('message.txt', message, (err) => {
+        res.statusCode = 302;
+        // '/' 로 redirect
+        res.setHeader('Location', '/');
+        return res.end();
+      });
     });
   }
   res.setHeader('Content-Type', 'text/html');
