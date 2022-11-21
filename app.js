@@ -1,9 +1,11 @@
 // 0. 경로를 생략하면 http라는 글로벌 모듈을 찾는다.
 const http = require('http');
+const fs = require('fs');
 
 // 1. 서버 생성
 const server = http.createServer((req, res) => {
   const url = req.url;
+  const method = req.method;
 
   if (url === '/') {
     res.write('<html>');
@@ -12,6 +14,14 @@ const server = http.createServer((req, res) => {
       "<body><form action='/message' method='POST'><input type='text' name='message'><button type='submit'>Send</button></form></body>"
     );
     res.write('</html>');
+    return res.end();
+  }
+
+  if (url === '/message' && method === 'POST') {
+    fs.writeFileSync('message.txt', 'DUMMY');
+    res.statusCode = 302;
+    // '/' 로 redirect
+    res.setHeader('Location', '/');
     return res.end();
   }
   res.setHeader('Content-Type', 'text/html');
