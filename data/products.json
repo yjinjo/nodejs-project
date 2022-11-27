@@ -1,1 +1,9 @@
-[{"title":"A Book","imageUrl":"https://www.publicbooks.org/wp-content/uploads/2017/01/book-e1484158615982.jpg","description":"This is an awesome book!","price":"19"}]
+[
+  {
+    "id": "1234245",
+    "title": "A Book",
+    "imageUrl": "https://www.publicbooks.org/wp-content/uploads/2017/01/book-e1484158615982.jpg",
+    "description": "This is an awesome book!",
+    "price": "19"
+  }
+]
