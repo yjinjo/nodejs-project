@@ -9,7 +9,7 @@ const db = require('./util/database');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
-db.execute('SELECT * FROM products');
+db.execute('SELECT * FROM products').then().catch();
 
 const app = express();
 
