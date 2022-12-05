@@ -184,7 +184,9 @@ module.exports = mongoose.model('User', userSchema);
 //         console.log(user);
 //         return user;
 //       })
-//       .catch((err) => console.log(err));
+//       .catch((err) => {
+//         console.log(err);
+//       });
 //   }
 // }
 
